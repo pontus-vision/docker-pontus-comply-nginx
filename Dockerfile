@@ -19,5 +19,5 @@ COPY --from=builder /pontus-lgpd-gui/build /opt/pontus/pontus-gui-lgpd/lib
 RUN useradd -u 1000 -s /bin/bash pontus
 
 EXPOSE 18443
-CMD  /usr/sbin/nginx
+CMD  /usr/sbin/nginx -g "daemon off;"
 
