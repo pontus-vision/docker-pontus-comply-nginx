@@ -1,12 +1,12 @@
 FROM node as builder
 WORKDIR /
 
-RUN  git clone  --depth 1 --single-branch --branch master https://github.com/pontusvision/pontus-lgpd-gui.git
-RUN cd pontus-lgpd-gui && \
+RUN  git clone  --depth 1    --single-branch  --branch master https://github.com/pontusvision/pontus-lgpd-gui.git && \
+     cd pontus-lgpd-gui && \
      ./build-local.sh
 
-RUN  git clone --depth 1 --single-branch --branch master https://github.com/pontusvision/pontus-gdpr-gui.git
-RUN cd pontus-gdpr-gui && \
+RUN  git clone --depth 1 --single-branch --branch master https://github.com/pontusvision/pontus-gdpr-gui.git && \
+     cd pontus-gdpr-gui && \
      ./build-local.sh
 
 #FROM pontusvisiongdpr/pontus-ca-base as ca
