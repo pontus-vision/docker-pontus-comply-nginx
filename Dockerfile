@@ -1,17 +1,3 @@
-FROM node as builder
-WORKDIR /
-
-RUN  git clone  --depth 1    --single-branch  --branch master https://github.com/pontusvision/pontus-lgpd-gui.git && \
-     cd pontus-lgpd-gui && \
-     ./build-local.sh
-
-RUN  git clone --depth 1 --single-branch --branch master https://github.com/pontusvision/pontus-gdpr-gui.git && \
-     cd pontus-gdpr-gui && \
-     ./build-local.sh
-
-#FROM pontusvisiongdpr/pontus-ca-base as ca
-#RUN /create-ca.sh
-
 FROM  node:7 as discovery-ui
 WORKDIR /
 
@@ -31,8 +17,8 @@ RUN mkdir -p /opt/pontus/pontus-gui-discovery
 
 RUN useradd -u 1000 -s /bin/bash pontus 
 
-COPY --from=builder /pontus-lgpd-gui/build /opt/pontus/pontus-gui-lgpd/lib
-COPY --from=builder /pontus-gdpr-gui/build /opt/pontus/pontus-gui-gdpr/lib
+COPY --from=pontusvisiongdpr/pontus-gdpr-comply-lib /opt/pontus/pontus-gui-gdpr/lib /opt/pontus/pontus-gui-gdpr/lib
+COPY --from=pontusvisiongdpr/pontus-lgpd-comply-lib /opt/pontus/pontus-gui-lgpd/lib /opt/pontus/pontus-gui-lgpd/lib
 COPY --from=discovery-ui /pontusvision-extract-discovery/dataprep-webapp/build /opt/pontus/pontus-gui-discovery/lib
 
 #COPY --from=ca /create-keys.sh /
