@@ -1,5 +1,5 @@
 FROM nginx
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY  nginx.conf /etc/nginx/nginx.conf
 RUN mkdir -p /opt/pontus/pontus-gui-lgpd
 RUN mkdir -p /opt/pontus/pontus-gui-gdpr
 RUN mkdir -p /opt/pontus/pontus-gui-discovery
